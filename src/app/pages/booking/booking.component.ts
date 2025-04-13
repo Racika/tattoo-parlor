@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import * as artistsData from '../../../assets/data/artists.json';
@@ -11,13 +11,17 @@ import * as artistsData from '../../../assets/data/artists.json';
   styleUrl: './booking.component.css'
 })
 export class BookingComponent {
-  artists: any[] = (artistsData as any).default; // needed due to TypeScript import quirk
+  artists: any[] = (artistsData as any).default; 
+
+  @Input() bookingTimes: string[] = [];
 
   formData = {
     selectedArtist: '',
     date: '',
+    time: '',  
     comment: ''
   };
+  
 
   submitted = false;
 
@@ -25,6 +29,7 @@ export class BookingComponent {
     this.submitted = true;
     this.formData = {
       selectedArtist: '',
+      time: '', 
       date: '',
       comment: ''
     };

@@ -2,11 +2,12 @@ import { Component, HostListener, OnInit, EventEmitter, Output, AfterViewInit } 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [MatToolbarModule, MatMenuModule, MatIconModule],
+  imports: [MatToolbarModule, MatMenuModule, MatIconModule, CommonModule],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
