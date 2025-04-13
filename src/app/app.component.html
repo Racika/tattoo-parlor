@@ -1,0 +1,12 @@
+<div id = "body">
+    <app-menu (selectedPage)="changePage($event)"></app-menu>
+
+    <!-- Display active page based on selectedPage -->
+    <app-home *ngIf="activePage === 'home'"></app-home>
+    <app-artists *ngIf="activePage === 'artists'"></app-artists>
+    <app-booking *ngIf="activePage === 'booking'"></app-booking>
+    <app-contact *ngIf="activePage === 'contact'"></app-contact>
+    
+    
+</div>
+

@@ -1,0 +1,27 @@
+<mat-toolbar color="primary">
+    <span class="logo">Tattoo Parlor</span>
+  
+    <span class="spacer"></span>
+  
+    <!-- Navigation Links -->
+    <nav class="nav-links">
+        <a mat-button (click)="menuSwitch('home')">Home</a>
+        <a mat-button (click)="menuSwitch('artists')">Artists</a>
+        <a mat-button (click)="menuSwitch('booking')">Booking</a>
+        <a mat-button (click)="menuSwitch('contact')">Contact</a>
+      </nav>
+  
+    <!-- Hamburger Menu for Mobile -->
+    <button *ngIf="isMobile" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <!-- Hamburger Menu -->
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="menuSwitch('home')">Home</button>
+    <button mat-menu-item (click)="menuSwitch('artists')">Artists</button>
+    <button mat-menu-item (click)="menuSwitch('booking')">Booking</button>
+    <button mat-menu-item (click)="menuSwitch('contact')">Contact</button>
+  </mat-menu>
+  

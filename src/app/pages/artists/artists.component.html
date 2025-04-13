@@ -1,0 +1,37 @@
+<div *ngIf="data && data.default" class="container">
+    <div *ngFor="let artist of data.default" class="card">
+      <img [src]="artist.img" alt="{{ artist.name }}" class="card-img">
+      <div class="card-content">
+        <h2>{{ artist.name }}</h2>
+        <p>Skill Level: {{ artist.skill }}</p>
+        <p>Contact: {{ artist.email }}</p>
+        <button class="rate-button" (click)="openPopup(artist)">Rate Artist</button>
+      </div>
+    </div>
+  </div>
+  <div class="popup-overlay" *ngIf="showPopup">
+    <div class="popup">
+      <h3>Rate {{ selectedArtist?.name }}</h3>
+  
+      <div class="stars">
+        <ng-container *ngFor="let star of [0,1,2,3,4]; let i = index">
+          <span
+            class="star"
+            [class.filled]="i < rating"
+            (click)="rating = i + 1"
+          >★</span>
+        </ng-container>
+      </div>
+  
+      <textarea [(ngModel)]="comment" placeholder="Leave a comment..."></textarea>
+  
+      <div class="popup-buttons">
+        <button (click)="submitRating()">Submit</button>
+        <button (click)="closePopup()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!data || !data.default">
+    <p>No data available. Please check the JSON file or the import.</p>
+  </div>

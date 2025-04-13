@@ -1,0 +1,21 @@
+<div class="form-container">
+    <form (ngSubmit)="onSubmit()" *ngIf="!submitted">
+      <label for="artist">Choose Artist:</label>
+      <select id="artist" [(ngModel)]="formData.selectedArtist" name="artist" required>
+        <option *ngFor="let artist of artists" [value]="artist.name">{{ artist.name }}</option>
+      </select>
+  
+      <label for="date">Select Date:</label>
+      <input type="date" id="date" [(ngModel)]="formData.date" name="date" required />
+  
+      <label for="comment">Comment:</label>
+      <textarea id="comment" [(ngModel)]="formData.comment" name="comment" rows="4"></textarea>
+  
+      <button type="submit">Submit Booking</button>
+    </form>
+  
+    <div *ngIf="submitted" class="thank-you">
+      <h2>Thank you for your booking!</h2>
+    </div>
+  </div>
+  
