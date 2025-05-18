@@ -1,0 +1,29 @@
+<div class="register-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate class="register-form">
+      <h2>Register</h2>
+  
+      <label for="nickname">Nickname</label>
+      <input id="nickname" formControlName="nickname" type="text" placeholder="Enter your nickname" />
+      <div *ngIf="registerForm.get('nickname')?.invalid && registerForm.get('nickname')?.touched" class="error">
+        Nickname is required (min 2 characters).
+      </div>
+  
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" type="email" placeholder="Enter your email" />
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error">
+        Enter a valid email.
+      </div>
+  
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" type="password" placeholder="Enter your password" />
+      <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error">
+        Password must be at least 6 characters.
+      </div>
+  
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  
+      <div *ngIf="errorMessage" class="error message">{{ errorMessage }}</div>
+      <div *ngIf="successMessage" class="success message">{{ successMessage }}</div>
+    </form>
+  </div>
+  

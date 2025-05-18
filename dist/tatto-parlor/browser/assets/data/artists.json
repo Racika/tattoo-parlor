@@ -1,0 +1,26 @@
+[  
+  {  
+    "img": "assets/images/artist1.jpg",  
+    "name": "Luca",  
+    "email": "luca@gmail.com",  
+    "skill": "90"  
+  },  
+  {  
+    "img": "assets/images/artist2.jpg",  
+    "name": "Lilly",  
+    "email": "lilly@gmail.com",  
+    "skill": "45"   
+  },  
+  {  
+    "img": "assets/images/artist3.jpg",  
+    "name": "Anna",  
+    "email": "anna@gmail.com",  
+    "skill": "depends"  
+  },  
+  {  
+    "img": "assets/images/artist4.jpg",  
+    "name": "John",  
+    "email": "john@gmail.com",  
+    "skill": "94"   
+  } 
+]  

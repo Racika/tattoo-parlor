@@ -1,13 +1,2 @@
-<div id="body">
-    <app-menu (selectedPage)="changePage($event)"></app-menu>
-  
-    <!-- Display active page based on selectedPage -->
-    <app-home *ngIf="activePage === 'home'"></app-home>
-    <app-artists *ngIf="activePage === 'artists'"></app-artists>
-    <app-booking 
-      *ngIf="activePage === 'booking'" 
-      [bookingTimes]="['10:00 AM', '12:00 PM', '2:00 PM', '4:00 PM', '6:00 PM']"
-    ></app-booking>
-    <app-contact *ngIf="activePage === 'contact'"></app-contact>
-  </div>
-  
+<app-menu (selectedPage)="onNavigate($event)"></app-menu>
+<router-outlet></router-outlet>

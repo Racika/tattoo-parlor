@@ -1,35 +1,47 @@
-import { Component, HostListener, OnInit, EventEmitter, Output, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
+import { Auth } from '@angular/fire/auth';
+import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [MatToolbarModule, MatMenuModule, MatIconModule, CommonModule],
+  imports: [CommonModule, MatToolbarModule, MatMenuModule, MatIconModule],
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent implements OnInit, AfterViewInit {
+export class MenuComponent implements OnInit {
   isMobile: boolean = false;
+  isLoggedIn = false;
 
-  @Output() selectedPage: EventEmitter<string> = new EventEmitter();
+  @Output() selectedPage = new EventEmitter<string>();
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    this.isMobile = window.innerWidth <= 768; // Switch to mobile view at 768px or less
+  constructor(private router: Router, private auth: Auth) {}
+
+  @HostListener('window:resize')
+  onResize() {
+    this.isMobile = window.innerWidth <= 768;
   }
 
   ngOnInit() {
     this.isMobile = window.innerWidth <= 768;
-  }
-  ngAfterViewInit(): void {
-    console.log("ngAfterViewInit called");
+
+    this.auth.onAuthStateChanged(user => {
+      this.isLoggedIn = !!user;
+    });
   }
 
-  menuSwitch(pageValue: string) {
-    this.selectedPage.emit(pageValue);
+  navigate(page: string) {
+    this.selectedPage.emit(page);
+    this.router.navigate([page === 'home' ? '' : page]);
   }
 
+  logout() {
+    this.auth.signOut().then(() => {
+      this.router.navigate(['/']);
+    });
+  }
 }

@@ -24,6 +24,9 @@ mat-toolbar {
     font-size: 1rem;
     margin-left: 20px; /* Space out the links */
   }
+  a[mat-button], button[mat-menu-item], button[mat-icon-button] {
+    cursor: pointer;
+  }
   
   .nav-links a:hover {
     color: #ff4081; /* Hover effect with contrasting color */

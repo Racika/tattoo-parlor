@@ -1,37 +1,46 @@
-<div *ngIf="data && data.default" class="container">
-    <div *ngFor="let artist of data.default" class="card">
-      <img [src]="artist.img" alt="{{ artist.name }}" class="card-img">
-      <div class="card-content">
-        <h2>{{ artist.name }}</h2>
-        <p>Skill Level: {{ artist.skill }}</p>
-        <p>Contact: {{ artist.email }}</p>
-        <button class="rate-button" (click)="openPopup(artist)">Rate Artist</button>
-      </div>
-    </div>
-  </div>
-  <div class="popup-overlay" *ngIf="showPopup">
-    <div class="popup">
-      <h3>Rate {{ selectedArtist?.name }}</h3>
-  
-      <div class="stars">
-        <ng-container *ngFor="let star of [0,1,2,3,4]; let i = index">
-          <span
-            class="star"
-            [class.filled]="i < rating"
-            (click)="rating = i + 1"
-          >★</span>
-        </ng-container>
-      </div>
-  
-      <textarea [(ngModel)]="comment" placeholder="Leave a comment..."></textarea>
-  
-      <div class="popup-buttons">
-        <button (click)="submitRating()">Submit</button>
-        <button (click)="closePopup()">Cancel</button>
-      </div>
-    </div>
-  </div>
-  
-  <div *ngIf="!data || !data.default">
-    <p>No data available. Please check the JSON file or the import.</p>
-  </div>
+<mat-toolbar color="primary">Our Tattoo Artists</mat-toolbar>
+
+<div *ngIf="data?.default" class="container">
+  <mat-card *ngFor="let artist of data.default" class="mat-elevation-z3">
+    <img mat-card-image [src]="artist.img" alt="{{ artist.name }}">
+    <mat-card-content>
+      <h2>{{ artist.name }}</h2>
+      <p>Skill Level: {{ artist.skill }}</p>
+      <p>Contact: {{ artist.email }}</p>
+      <button mat-raised-button color="accent" (click)="openPopup(artist)">
+        <mat-icon>star</mat-icon> Rate Artist
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Rating Popup -->
+<div *ngIf="showPopup" class="popup-overlay">
+  <div class="popup mat-elevation-z3">
+
+  <h3>Rate {{ selectedArtist?.name }}</h3>
+
+  <mat-form-field>
+    <mat-label>Rating</mat-label>
+    <mat-select [(value)]="rating">
+      <mat-option *ngFor="let r of [1,2,3,4,5]" [value]="r">{{ r }} Star</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Leave a comment</mat-label>
+    <textarea matInput [(ngModel)]="comment"></textarea>
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+
+  <div class="popup-buttons">
+    <button mat-flat-button color="primary" (click)="submitRating()">Submit</button>
+    <button mat-stroked-button color="warn" (click)="closePopup()">Cancel</button>
+  </div>  </div>
+</div>
+
+
+<div *ngIf="!data?.default">
+  <p>No data available. Please check the JSON file or the import.</p>
+</div>

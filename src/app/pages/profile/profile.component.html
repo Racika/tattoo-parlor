@@ -1,0 +1,69 @@
+<section class="profile-container">
+    <h2 class="welcome-text">Welcome, <span class="nickname">{{ nickname }}</span>!</h2>
+  
+    <div class="bookings-section" *ngIf="filteredBookings.length > 0; else noBookings">
+      <h3>Your bookings:</h3>
+  
+      <button (click)="toggleSortByDate()">
+        Sort by date {{ sortAscending ? '↓' : '↑' }}
+      </button>
+  
+      <div class="filter-options" style="margin: 10px 0;">
+        <label>
+          <input
+            type="radio"
+            name="dateFilter"
+            [checked]="!showOnlyUpcoming"
+            (change)="toggleShowOnlyUpcoming()"
+          />
+          Show All
+        </label>
+        <label style="margin-left: 15px;">
+          <input
+            type="radio"
+            name="dateFilter"
+            [checked]="showOnlyUpcoming"
+            (change)="toggleShowOnlyUpcoming()"
+          />
+          Upcoming Only
+        </label>
+      </div>
+  
+      <ul class="bookings-list">
+        <li *ngFor="let booking of filteredBookings" class="booking-item">
+          <div class="booking-info">
+            <span><strong>Artist:</strong> {{ booking.artist }}</span>
+            <span><strong>Date:</strong> {{ booking.date }}</span>
+            <span><strong>Time:</strong> {{ booking.time }}</span>
+          </div>
+  
+          <div class="comment-section">
+            <ng-container *ngIf="editingBookingId !== booking.id; else editTemplate">
+              <p class="comment-text">Comment: {{ booking.comment || '(no comment)' }}</p>
+              <div class="buttons">
+                <button class="btn btn-edit" (click)="startEditing(booking)">Edit Comment</button>
+                <button class="btn btn-delete" (click)="deleteBooking(booking.id)">Delete</button>
+              </div>
+            </ng-container>
+  
+            <ng-template #editTemplate>
+              <textarea #commentTextarea [(ngModel)]="editedComment" class="comment-textarea"></textarea>
+              <div class="buttons">
+                <button class="btn btn-save" (click)="saveComment(booking.id)">Save</button>
+                <button class="btn btn-cancel" (click)="cancelEditing()">Cancel</button>
+              </div>
+            </ng-template>
+          </div>
+        </li>
+      </ul>
+    </div>
+  
+    <ng-template #noBookings>
+      <div class="no-bookings-message">
+        <p>No bookings found. <a routerLink="/booking">Book here!</a></p>
+      </div>
+    </ng-template>
+  
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </section>
+  
