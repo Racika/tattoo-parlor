@@ -1,5 +1,13 @@
 # Tattoo parlor
 
-In case it wont start, run npm install node beforehand
 
-browser errors removed, websocket problems are from vscode not my end :D
+## Minden megvalósítva, türelmesen vadászd a sourceban <3
+
+("Tetováló szalon időpontfoglaló oldal" téma)
+
+https://tattoo-parlor-416c2.web.app
+
+Login with premade bookings:
+admin@admin.com
+admin123
+
